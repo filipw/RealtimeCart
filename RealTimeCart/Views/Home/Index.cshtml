@@ -1,0 +1,74 @@
+﻿    <div class="row-fluid">
+        <div class="span8">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach: Books">
+                    <tr>
+                        <td data-bind="text: id"></td>
+                        <td data-bind="text: title"></td>
+                        <td data-bind="text: author"></td>
+                        <td data-bind="text: quantity"></td>
+                        <td data-bind="text: price"></td>
+                        <td>
+                            <input class="input-mini" type="text" placeholder=".input-mini" data-bind="value: selectedQuantity"/>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary" type="button" data-bind='click: $parent.Cart.add'>Add</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="span4">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Product</th>
+                        <th>Subtotal</th>
+                        <th>Quantity</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach: Cart.items">
+                    <tr>
+                        <td data-bind="text: $index()+1"></td>
+                        <td data-bind="text: product.title"></td>
+                        <td data-bind="text: subtotal()"></td>
+                        <td data-bind="text: quantity"></td>
+                        <td>
+                            <button class="btn btn-primary" type="button" data-bind='click: $parent.Cart.remove'>Remove</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table">
+                <tr class="success">
+                    <td>
+                        Total: <span data-bind='text: Cart.grandTotal()'> </span>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary" type="button" data-bind='click: Cart.checkOut'>Send Order</button>
+                    </td>
+                </tr>
+            </table>
+            
+        </div>
+    </div>
+
+@section scripts {
+    <script type="text/javascript" src="~/Scripts/jquery.signalR-1.0.0.js"></script>
+    <script type="text/javascript" src="~/signalr/hubs"></script>
+    <script type="text/javascript" src="~/Scripts/common.js"></script>
+    <script type="text/javascript" src="~/Scripts/app.js"></script>
+}

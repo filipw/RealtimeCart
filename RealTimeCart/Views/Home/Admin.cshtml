@@ -1,0 +1,40 @@
+﻿    <div class="row-fluid">
+        <div class="span12">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Customer Name</th>
+                        <th>Order Total</th>
+                        <th>Items</th>
+                        <th>Approved</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach: Orders">
+                    <tr>
+                        <td data-bind="text: id"></td>
+                        <td data-bind="text: customerName"></td>
+                        <td data-bind="text: orderTotal"></td>
+                        <td>
+                            <ul data-bind="foreach: books">
+                                <li> <span data-bind="text: title"></span> - <span data-bind="text: selectedQuantity"></span> items</li>
+                            </ul>
+                        </td>
+                        <td data-bind="text: approved()"></td>
+                        <td>
+                            <button class="btn btn-success" type="button" data-bind='click: $parent.AdminTools.approve, disable: approved()'>Confirm</button>
+                            <button class="btn btn-danger" type="button" data-bind='click: $parent.AdminTools.reject, disable: !approved()'>Reject</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+@section scripts {
+    <script type="text/javascript" src="~/Scripts/jquery.signalR-1.0.0.js"></script>
+    <script type="text/javascript" src="~/signalr/hubs"></script>
+    <script type="text/javascript" src="~/Scripts/common.js"></script>
+    <script type="text/javascript" src="~/Scripts/admin.js"></script>
+}
